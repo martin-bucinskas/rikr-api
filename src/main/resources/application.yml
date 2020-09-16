@@ -46,6 +46,25 @@ spring:
             non_contextual_creation: true
     show-sql: false
 
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      slidingWindowSize: 100
+      permittedNumberOfCallsInHalfOpenState: 10
+      waitDurationInOpenState: 10000
+      failureRateThreshold: 60
+      eventConsumerBufferSize: 10
+      registerHealthIndicator: true
+    someShared:
+      slidingWindowSize: 50
+      permittedNumberOfCallsInHalfOpenState: 10
+  instances:
+    backendA:
+      baseConfig: default
+      waitDurationInOpenState: 5000
+    backendB:
+      baseConfig: someShared
+
 logging:
   level:
     root: info
