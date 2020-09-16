@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  riki_core_api:
+    image: 'postgres'
+    ports:
+    - 5432:5432
+    environment:
+      - POSTGRES_HOST=${RIKR_POSTGRES_HOST}
+      - POSTGRES_PORT=${RIKR_POSTGRES_PORT}
+      - POSTGRES_NAME=${RIKR_POSTGRES_NAME}
+      - POSTGRES_DB=${RIKR_POSTGRES_NAME}
+      - POSTGRES_USERNAME=${RIKR_POSTGRES_USERNAME}
+      - POSTGRES_PASSWORD=${RIKR_POSTGRES_PASSWORD}
+    volumes:
+    - database-data:/var/lib/postgresql/database
+
+volumes:
+  database-data
