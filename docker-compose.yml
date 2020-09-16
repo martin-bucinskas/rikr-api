@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  riki_core_api:
+  rikr_core_api:
     image: 'postgres'
     ports:
     - 5432:5432
@@ -16,4 +16,4 @@ services:
     - database-data:/var/lib/postgresql/database
 
 volumes:
-  database-data
+  database-data:

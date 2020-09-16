@@ -1,11 +1,8 @@
 info:
   app:
-    name: @project.name@
-    description: @project.description@
-    version: @project.version@
-    encoding: @project.build.sourceEncoding@
-    java:
-      version: @java.version@
+    name: Rikr-Core-API
+    description: Rikr core API
+    version: 0.0.1-SNAPSHOT
 
 server:
   port: ${RIKR_API_PORT:8080}
