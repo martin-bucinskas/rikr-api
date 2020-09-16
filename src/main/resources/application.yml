@@ -1,0 +1,54 @@
+info:
+  app:
+    name: @project.name@
+    description: @project.description@
+    version: @project.version@
+    encoding: @project.build.sourceEncoding@
+    java:
+      version: @java.version@
+
+server:
+  port: ${RIKR_API_PORT:8080}
+
+management:
+  endpoint:
+    health:
+      show-details: always
+      status:
+        http-mapping:
+          UP: 200
+          DOWN: 503
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: health, info
+
+spring:
+  application:
+    name: Rikr Core API
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${RIKR_API_OAUTH2_PROVIDER:}
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${RIKR_POSTGRES_HOST:localhost}:${RIKR_POSTGRES_PORT:5432}/${RIKR_POSTGRES_NAME:rikr}${RIKR_POSTGRES_CONNECTION_OPTIONS:}
+    username: ${RIKR_POSTGRES_USERNAME:}
+    password: ${RIKR_POSTGRES_PASSWORD:}
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    show-sql: false
+
+logging:
+  level:
+    root: info
